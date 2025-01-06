@@ -1,0 +1,80 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 80%;
+  padding: 20px;
+}
+
+img {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+.card {
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.cl-flex {
+  display: flex;
+}
+
+.cl-justifyContent-around {
+  justify-content: space-around;
+}
+
+.cl-justifyContent-between {
+  justify-content: between;
+}
+
+.cl-alignItems-center {
+  align-items: center;
+}
+
+.cl-flex-column {
+  flex-direction: column;
+}
+
+.cl-text-center {
+  text-align: center;
+}
+
+.cl-line-through {
+  text-decoration: line-through;
+}
+
+.bigImg {
+  width: 120px;
+}
+
+.smallImg {
+  width: 60px;
+  cursor: pointer;
+}
+
+.cl-mx-4 {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.cl-mx-8 {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.cl-my-8 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+button {
+  cursor: pointer;
+}
