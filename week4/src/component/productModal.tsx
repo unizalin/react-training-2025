@@ -113,7 +113,7 @@ function ProductModal({
                       <label htmlFor="num" className="col-sm-2 col-form-label">數量
                       </label>
                       <div className="col-sm-10">
-                        <input id="num" type="text" className="form-control"  placeholder="數量" value={templateData.num??""}
+                        <input id="num" type="number" className="form-control"  placeholder="數量" value={templateData.num??0}
                         onChange={onInputChange}/>
                       </div>
                     </div>
@@ -121,7 +121,7 @@ function ProductModal({
                       <label htmlFor="vistorNum" className="col-sm-3 col-form-label">每棟人數
                       </label>
                       <div className="col-sm-9">
-                        <input id="vistorNum" type="text" className="form-control"  placeholder="請輸入每棟人數" value={templateData.vistorNum??""}
+                        <input id="vistorNum" type="number" className="form-control"  placeholder="請輸入每棟人數" value={templateData.vistorNum??0}
                         onChange={onInputChange}/>
                       </div>
                     </div>
@@ -138,7 +138,7 @@ function ProductModal({
                       <label htmlFor="extraBedNum" className="col-sm-4 col-form-label">每棟可加床人數
                       </label>
                       <div className="col">
-                      <input id="extraBedNum" type="text" className="form-control"  placeholder="請輸入加床人數" value={templateData.extraBedNum??""}
+                      <input id="extraBedNum" type="number" className="form-control"  placeholder="請輸入加床人數" value={templateData.extraBedNum??0}
                         onChange={onInputChange}/>
                       </div>
                     </div>:
