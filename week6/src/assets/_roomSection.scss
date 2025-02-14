@@ -1,0 +1,145 @@
+
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 30vh; 
+  background-color: #F8E9E2; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  .hero-bg-text {
+    position: absolute;
+    font-family: "Playfair Display", serif; 
+    font-size: 10rem; 
+    white-space: nowrap;
+    font-weight: 700;
+    color: rgba(76, 48, 96, 0.05); 
+    text-transform: uppercase; 
+    line-height: 1;
+    pointer-events: none; 
+    user-select: none;   
+  }
+  .hero-overlay {
+    position: relative;
+    text-align: center;
+    max-width: 600px;
+    z-index: 10; 
+  }
+  .hero-overlay h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #4C3060; 
+  }
+  .hero-overlay p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    background-color: #4C3060; 
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  .cta-btn:hover {
+    background-color: #3A234C;
+  }
+}
+
+.roomCardSection{
+  padding: 40px 5%;
+  margin-top: -50px;
+  .card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center; 
+    flex-wrap: wrap; 
+  }
+  .swiper{
+    overflow: unset;
+  }
+  .rooms{
+    min-height: 400px;
+    cursor:pointer;
+    position: relative;
+    .hover-content{
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* 50% 透明的黑色 */
+    }
+  }
+  
+  /* Card 本身 */
+  .card {
+    background-color: #FFF6EA ; 
+    border-radius: 20px; 
+    width: 340px; 
+    padding: 20px;
+    margin: 0 20px;
+    border-color: #FFF6EA ;
+    box-shadow: 0 4px 8px #FBEBDF;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    &:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  /* 地點與距離 */
+  .location {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  .distance {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  /* 圓形圖片 */
+  .image-wrapper {
+    width: 220px; 
+    height: 220px; 
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .explore{
+    cursor: pointer;
+  }
+  .explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 8px;
+    text-decoration: none;
+    background-color: #FBEBDF;
+    color: #4C3060;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  .explore-btn:hover {
+    background-color: #4C3060;
+    color: #FFF;
+  }
+  .explore-btn .icon {
+    font-size: 1.2rem;
+  }
+}

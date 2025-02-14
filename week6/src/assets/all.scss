@@ -1,0 +1,41 @@
+@import 'bootstrap/scss/functions';
+@import './variables';
+@import'./roomSection';
+@import 'bootstrap/scss/bootstrap';
+
+section {
+  scroll-margin-top: 60px; 
+}
+.wrapper{
+  margin-top: 80px;
+  .carousel-inner {
+    width: 60%
+  }
+}
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #F3DFD8; 
+}
+
+.hero-section {
+  background-color: #F3DFD8;
+}
+
+.experiences-section {
+  background-color: #EEE;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #4C3060 !important; /* 深紫藍，可自行變動 */
+}
+.nav-link {
+  color: #333 !important; 
+}
+.nav-link:hover {
+  color: #4C3060 !important; 
+}
+
+footer {
+  font-size: 0.9rem;
+}
