@@ -10,6 +10,7 @@ import Login from '../pages/login';
 import HomeStay  from '../pages/admin/homeStay'
 import OrderList from '../pages/admin/orderList';
 import Souvenirs from '../pages/admin/souvenirs'
+import Register from '../pages/admin/register'
 
 
 export const routes = createHashRouter([
@@ -59,6 +60,11 @@ export const routes = createHashRouter([
         path: 'souvenirs',
         element: <Souvenirs />
       },
+      {
+        path: 'register',
+        element: <Register />
+      },
+      
       {
         path: 'orderList',
         element: <OrderList />

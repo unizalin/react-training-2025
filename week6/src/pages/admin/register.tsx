@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import * as bootstrap from "bootstrap";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ReactLoading from 'react-loading';
 import axios from "axios";
-import { currency } from "../../src/utils/filter.js";
+import { currency } from "../../utils/filter.js";
 
 interface Product{ 
   id: string;
