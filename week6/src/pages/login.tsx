@@ -28,9 +28,7 @@ function Login(){
   async function login(event: React.FormEvent<HTMLFormElement>) {
     try {
       event.preventDefault();
-      console.log('login',user)
       const signInRes = await axios.post(`${apiUrl}admin/signin`,user)
-      console.log('signInRes',signInRes)
       const { token, expired } = signInRes.data
       document.cookie = `hexToken=${token};expires=${new Date(expired)};`;
       axios.defaults.headers.common.Authorization = `${token}`;

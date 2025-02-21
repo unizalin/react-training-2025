@@ -24,7 +24,6 @@ function AdminLayout() {
 
       const checkRes = await axios.post(`${apiUrl}api/user/check`)
 
-      console.log('checkRes',checkRes)
       if(checkRes.status != 200){
         navigate("/login");
       }

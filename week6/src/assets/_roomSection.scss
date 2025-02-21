@@ -50,6 +50,24 @@
   }
 }
 
+.foodCardSection{
+  .swiper{
+    overflow: unset;
+  }
+  .card{
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    img{
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+    };
+    &:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
 .roomCardSection{
   padding: 40px 5%;
   margin-top: -50px;

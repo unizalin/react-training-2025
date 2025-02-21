@@ -82,11 +82,9 @@ function Home() {
     
     const deleteProduct = async (id: string) => {
       try {
-        console.log('deleteProduct',id)
         await axios.delete(
           `${apiUrl}api/${apiPath}/admin/product/${id}`
         );
-        console.log("刪除成功");
         productModalRef.current.hide();
         await getProductCategories('民宿');
       } catch (error) {
@@ -113,10 +111,8 @@ function Home() {
       try {
         if (modalType === "edit") {
           await axios.put(url, productData);
-          console.log("更新成功");
         } else {
           await axios.post(url, productData);
-          console.log("新增成功");
         }
         productModalRef.current?.hide();
         await getProductCategories('民宿');

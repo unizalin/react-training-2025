@@ -120,7 +120,6 @@ function Register() {
     try {
       const productRes = await axios.get(`${apiUrl}api/${apiPath}/product/${id}`)
       setProduct(productRes.data.product)
-      console.log('productRes',productRes.data.product)
       productModalRef.current.show()
       setProductType('')
     } catch (error) {
@@ -129,7 +128,6 @@ function Register() {
   }
   // 關閉Modal
   const closeModal = () =>{
-    console.log('closeModal')
     setProductIdLoding('')
     productModalRef.current.hide()
   }
@@ -167,9 +165,7 @@ function Register() {
         product_id: id,
         qty:qty
       }
-      console.log('updateCart',data)
-      const updateCartRes = await axios.put(`${apiUrl}api/${apiPath}/cart/${id}`,{data})
-      console.log('updateCartRes',updateCartRes)
+      await axios.put(`${apiUrl}api/${apiPath}/cart/${id}`,{data})
     } catch (error) {
       console.log('updateCart error:'+error)
     } finally {
@@ -180,8 +176,7 @@ function Register() {
   const deleteCart = async(id:string) =>{
     setProductIdLoding(id)
     try {
-      const deleteRes = await axios.delete(`${apiUrl}api/${apiPath}/cart/${id}`)
-      console.log("deleteCart",deleteRes) 
+      await axios.delete(`${apiUrl}api/${apiPath}/cart/${id}`)
     } catch (error) {
       console.log('deleteCart error:'+error)
     }finally{
@@ -210,15 +205,13 @@ function Register() {
 
   const onSubmit: SubmitHandler<FormInput> = async(userData) =>{
     try {
-      console.log('onSubmit userData:',userData)
       if(userData){
         const {name,email,tel,address,message} = userData
         const data={
           user: {name,email,tel,address},
           message: message
         }
-        const orderRes = await axios.post(`${apiUrl}api/${apiPath}/order`, { data })
-        console.log('orderRes',orderRes)
+        await axios.post(`${apiUrl}api/${apiPath}/order`, { data })
       }
     } catch (error) {
       console.log('onSubmit error:'+error)

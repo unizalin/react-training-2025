@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import * as bootstrap from "bootstrap";
-import { currency, date } from "../../utils/filter.js";
+import { currency, date } from "../utils/filter.js";
 import ReactLoading from 'react-loading';
 import axios from "axios";
 
@@ -52,10 +52,15 @@ function OrderList() {
     orderModalRef.current = new bootstrap.Modal("#orderModal", {
       keyboard: false,
     });
+    checkModalRef.current = new bootstrap.Modal("#checkModal", {
+      keyboard: false,
+    });
   }, [])
 
   const [orderList, setOrderList] = useState<Order[]>([])
   const orderModalRef = useRef<bootstrap.Modal | null>(null);
+  const checkModalRef = useRef<bootstrap.Modal | null>(null);
+
   const [order, setOrder] = useState<Order | null>(null);
   const [orderProducts, setOrderProducts] = useState<OrderProduct[]>([])
   const [orderIdLoading , setOrderIdLoading] = useState<string>('')
@@ -64,6 +69,10 @@ function OrderList() {
   const openModal = async(id: string) => {
     await getOrder(id)
     orderModalRef.current.show();
+  }
+  // 開啟結帳Modal
+  const openPayModal = async() => {
+    checkModalRef.current.show();
   }
   // 取得訂單列表
   const getOrderList = async()  =>{
@@ -91,19 +100,20 @@ function OrderList() {
     setOrderIdLoading(id)
     setOrderType('pay')
     try {
-      const payRes = await axios.post(`${apiUrl}api/${apiPath}/pay/${id}`)
-      console.log('payRes',payRes)
+      await axios.post(`${apiUrl}api/${apiPath}/pay/${id}`)
     } catch (error) {
       console.log('payOrder error :'+error)
     }finally{
       setOrderIdLoading('')
       getOrderList()
+      checkModalRef.current.hide();
     }
   }
   const closeModal = () => {
     setOrderIdLoading('')
     setOrderType('')
     orderModalRef.current.hide();
+    checkModalRef.current.hide();
   }
   return(<>
     <div className="container p-4 mt-4">
@@ -114,7 +124,7 @@ function OrderList() {
             <th>購買姓名</th>
             <th>購買金額</th>
             <th>詳細資訊</th>
-            <th>結帳</th>
+            <th>是否付款</th>
           </tr>
         </thead>
         <tbody>
@@ -129,14 +139,14 @@ function OrderList() {
                 {orderIdLoading == order.id && orderType =='open'? <ReactLoading type={'spin'} color={'#000'} height={20} width={20} /> : '查看此筆購物資訊'}
                 </button></td>
               <td>
-                {order.is_paid ? '已付款' : '尚未結帳'}
+                {order.is_paid ? '已付款' :'尚未結帳'}
               </td>
             </tr>
             ))}
         </tbody>
       </table>
       {/* 產品Modal */}
-      <div className="modal fade" id="orderModal" ref={orderModalRef} role="dialog" aria-labelledby="orderLabel" aria-hidden="true">
+      <div className="modal fade" id="orderModal" ref={orderModalRef} role="dialog" aria-labelledby="orderModal" aria-hidden="true">
         <div className="modal-dialog modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -155,8 +165,30 @@ function OrderList() {
               <p>備註：{order?.message}</p>
             </div>
             <div className="modal-footer">
+              <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => { closeModal(); openPayModal(); }}>
+              結帳</button>
               <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={()=>closeModal()}>
                 Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* 產品Modal */}
+       {/* 產品Modal */}
+       <div className="modal fade" id="checkModal" ref={checkModalRef} role="dialog" aria-labelledby="checkModal" aria-hidden="true">
+        <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">{order?.user.name} 購物清單</h5>
+            </div>
+            <div className="modal-body">
+              是否要結帳次筆訂單
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-success" data-dismiss="modal" onClick={()=>payOrder(order?.id ?? '')}>
+              確定</button>
+              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>closeModal()}>
+                取消</button>
             </div>
           </div>
         </div>

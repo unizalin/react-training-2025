@@ -64,7 +64,6 @@ function App() {
       }else{
         setIsLogin(false)
       }
-      console.log('checkRes',checkRes)
     } catch (error) {
       console.log('checkLogin error :'+error)
     }

@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Room from '../components/frontend/room';
+import Local from '../components/frontend/local'
+import { Link } from "react-router";
 function Home() {
   return(
     <>
@@ -39,9 +41,25 @@ function Home() {
         className="vh-100 d-flex align-items-center experiences-section"
       >
         <div className="container text-center">
-          <h2>在地體驗</h2>
-          <p>與在地人一起探索隱藏景點與文化</p>
-          <button className="btn btn-primary mt-4">查看更多體驗</button>
+          <div className="row">
+            <div className="col-6">
+              <div className="hero-text">
+              <h1>在地手作 | 精選伴手禮</h1>
+              <h2>匠心手作，最暖心的伴手禮</h2>
+              <hr />
+              <p className='mt-4'>我們相信，每一份伴手禮不只是美食，更是一份心意的傳遞。<br />
+              從挑選優質食材，到每一道用心製作的工序，都是為了讓這份禮物承載滿滿的溫暖。</p>
+              <p className="text-muted mt-4">
+                  我們的伴手禮堅持在地手作，嚴選優質食材與細膩工藝，讓每一份禮物都承載滿滿心意。
+                  無論是旅行、節慶送禮，還是與親朋好友共享，都能帶來美好回憶。
+              </p>
+              <Link to="local" className="btn btn-outline-dark custom-btn">探索我們的伴手禮</Link>
+              </div>
+            </div>
+            <div className="col-6">
+              <Local modalType='img'/>
+            </div>
+        </div>
         </div>
       </section>
       {/* 第四區塊 (聯絡我們) */}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";  // 修正 import
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -11,7 +11,6 @@ import axios from 'axios';
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiPath = import.meta.env.VITE_API_APIPATH;
 
-// 產品類型定義
 interface Product {
   id: string;
   imageUrl: string;
@@ -35,11 +34,8 @@ function Room({modalType}:{modalType: string}) {
   const isFetched = useRef(false);
 
   useEffect(() => {
-    if (!isFetched.current) {
-      getProductCategories('民宿');
-      isFetched.current = true; 
-    }
-  }, [modalType]);
+    getProductCategories('民宿');
+  }, [modalType]);  // 修正依賴問題
 
   const [hoveredItems, setHoveredItems] = useState<{ [key: string]: boolean }>({});
 
@@ -57,10 +53,7 @@ function Room({modalType}:{modalType: string}) {
         params: { category: type },
       });
 
-      // 檢查 API 結構，避免 `undefined` 錯誤
       const fetchedProducts = response.data?.products || [];
-
-      // 過濾 `is_enabled = true` 的產品
       const filteredProducts = fetchedProducts.filter(
         (product: Product) => product.is_enabled
       );
@@ -75,43 +68,45 @@ function Room({modalType}:{modalType: string}) {
     <div className='roomCardSection'>
       <div className="card-container">
         <Swiper
-          slidesPerView={1} // 手機顯示 1 張
+          slidesPerView={1}
           breakpoints={{
-            768: { slidesPerView: 2 }, // 平板顯示 2 張
-            1024: { slidesPerView: 3 }, // 桌面顯示 3 張
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
         >
           {products.length > 0 ? (
             products.map((product, index) => (
-              <SwiperSlide key={product.id || `${product.title}`}>
-              <div
-                className={`card ${modalType}`}
-                onMouseEnter={() => handleMouseEnter(product.id)}
-                onMouseLeave={() => handleMouseLeave(product.id)}
-              >
-                {hoveredItems[product.id] && modalType === 'rooms' && (
-                  <Link to={`/room/${product.id}`} className='hover-content p-4 '>
-                    <div className="h-100 d-flex flex-column justify-content-between">
-                      <div className="d-flex justify-content-between">
-                        <div className="text-white h4">{product.title}</div>
-                        <div className="btn btn-outline-info text-white">訂房</div>
+              <SwiperSlide key={product.id || `product-${index}`}> {/* 修正 key */}
+                <div
+                  className={`card ${modalType}`}
+                  onMouseEnter={() => handleMouseEnter(product.id)}
+                  onMouseLeave={() => handleMouseLeave(product.id)}
+                >
+                  {hoveredItems[product.id] && modalType?.toLowerCase() === 'rooms' && (  // 修正 modalType 檢查
+                    <Link to={`/room/${product.id}`} className='hover-content p-4 '>
+                      <div className="h-100 d-flex flex-column justify-content-between">
+                        <div className="d-flex justify-content-between">
+                          <div className="text-white h4">{product.title}</div>
+                          <div className="btn btn-outline-info text-white">訂房</div>
+                        </div>
+                        <p className='text-white'>{product.description}</p>
                       </div>
-                      <p className='text-white'>{product.description}</p>
+                    </Link>
+                  )}
+                  <h2 className="location align-self-start">{product.title}</h2>
+                  <span className="distance">246 kilometers away</span> {/* 修正 p 為 span */}
+                  <div className="image-wrapper">
+                    <img src={product.imageUrl} alt={product.title} />
+                  </div>
+                  { modalType !== 'rooms' && (
+                    <div className="d-flex align-self-start align-items-center explore">
+                      <Link to={`/room/${product.id}`} className='nav-link' >
+                        <span className="explore-btn m-3">↳</span> Explore
+                      </Link>
                     </div>
-                  </Link>
-                )}
-                <h2 className="location align-self-start">{product.title}</h2>
-                <p className="distance">246 kilometers away</p>
-                <div className="image-wrapper">
-                  <img src={product.imageUrl} alt={product.title} />
+                  )}
                 </div>
-                { modalType != 'rooms' &&(<div className="d-flex align-self-start align-items-center explore">
-                  <Link to={`/room/${product.id}`} className='nav-link' >
-                    <span className="explore-btn m-3">↳</span> Explore
-                  </Link>
-                </div>)}
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
             ))
           ) : (
             <p>載入中...</p>

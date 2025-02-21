@@ -91,8 +91,7 @@ function OrderList() {
     setOrderIdLoading(id)
     setOrderType('pay')
     try {
-      const payRes = await axios.post(`${apiUrl}api/${apiPath}/pay/${id}`)
-      console.log('payRes',payRes)
+      await axios.post(`${apiUrl}api/${apiPath}/pay/${id}`)
     } catch (error) {
       console.log('payOrder error :'+error)
     }finally{

@@ -41,7 +41,6 @@ function App() {
 
   useEffect(() => {
     if (modalRef.current) {
-      console.log('modalRef',modalRef)
       productModalRef.current = new bootstrap.Modal("#productModal", {
         keyboard: false,
       });
@@ -66,7 +65,6 @@ function App() {
 
   const handleModalInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value, type, checked } = e.target;
-    console.log(e)
     setTempProduct((prevData) => ({
       ...prevData,
       [id]: type === "checkbox" ? checked : value,
@@ -102,7 +100,6 @@ function App() {
       }else{
         setIsLogin(false)
       }
-      console.log('checkRes',checkRes)
     } catch (error) {
       console.log('checkLogin error :'+error)
     }
@@ -119,7 +116,6 @@ function App() {
 
   const deleteProduct = async (id: string) => {
     try {
-      console.log('deleteProduct',id)
       await axios.delete(
         `${apiUrl}api/${apiPath}/admin/product/${id}`
       );
@@ -150,10 +146,8 @@ function App() {
     try {
       if (modalType === "edit") {
         await axios.put(url, productData);
-        console.log("更新成功");
       } else {
         await axios.post(url, productData);
-        console.log("新增成功");
       }
       productModalRef.current?.hide();
       getProducts();
@@ -203,8 +197,6 @@ function App() {
   };
 
   const openModal = (product: Partial<Product>, type: "new" | "edit" | "delete") => {
-    console.log('openModal',product,type)
-    console.log('productModalRef',productModalRef)
     setModalType(type);
     if (productModalRef.current) {
       productModalRef.current.show();

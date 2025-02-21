@@ -25,7 +25,10 @@ function header() {
             <Link className="nav-link" to="/rooms">房型介紹</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/local">在地體驗</Link>
+            <Link className="nav-link" to="/locals">在地體驗</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/checkout">訂單結帳</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/orderlist">訂單查詢</Link>
